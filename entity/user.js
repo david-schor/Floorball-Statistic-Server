@@ -1,12 +1,16 @@
 const Schema = require('nano-schema')
 
 const user = new Schema({
-    email: {
+    username: {
         type: String,
         required: true,
     },
-    password: {
-        type: String,
+    created: {
+        type: Date,
+        required: true,
+    },
+    last_login: {
+        type: Date,
         required: true,
     }
 });
