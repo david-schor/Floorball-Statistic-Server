@@ -3,6 +3,7 @@ const fs = require('fs')
 const pki = require('node-forge').pki
 const express = require('express')
 const app = express()
+const route = require('./route')
 
 let ownJwtToken = null;
 
@@ -44,10 +45,27 @@ console.log(caList.length + ' CA loaded')
 
 
 
-
-
-
 app.use(express.json())
 
 
 app.listen(2400, () => {console.log("Server started: 2400")})
+
+app.use('/api/auth', route)
+/*
+const router = express.Router()
+const User = require('./entity/user')
+const userService = require('./service/userService')
+
+app.post('/signup', (req, res) => {
+
+  const newuser = new User.User(req.body.username, Date.now(), null)
+  console.log(newuser)
+  userService.addUser(newuser)
+        res.status(200).json('yes')
+
+});
+
+app.get('/test', (req,res) => res.json({msg: "Users works"}));
+
+
+*/
