@@ -1,10 +1,8 @@
-const User = require('../entity/user');
 const userService = require('../service/userService');
 
 function signup(req, res) {
-    const user = new User.User(req.body.username, Date.now(), null)
-    userService.addUser(user)
-    return res.json('done the job');
+    userService.addUser(req)
+    return res.json('User added: ' + req);
 };
 
 // for testing purpose only

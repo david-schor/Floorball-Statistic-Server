@@ -1,18 +1,10 @@
-const Schema = require('nano-schema')
+function Password(userId, password, created) {
+  this.userId = userId
+  this.password = password
+  this.created = created
+}
 
-const password = new Schema({
-    userId: {
-        type: Number,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    created: {
-        type: Date,
-        required: true,
-    }
-});
+module.exports = {
+  Password: Password,
+};
 
-module.exports = password

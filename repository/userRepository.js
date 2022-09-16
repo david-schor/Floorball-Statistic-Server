@@ -1,5 +1,6 @@
-const nano = require('nano')('http://admin:Enzian2000@192.168.0.28:5984')
-const db = nano.use('user')
+const use = 'user'
+const nano = require('nano')('')
+const db = nano.use(use)
 const update = require('../util/update')
 
     function findUserByName(username) {
@@ -16,17 +17,20 @@ const update = require('../util/update')
           }
         });
 
-        //var test = db.get(id)
-        //console.log(test)
     }
 
-    function addUser(user) {
-        db.insert({username: user.username, created: user.created})
+    function addUser(user, callback) {
+        db.insert({username: user.username, created: user.created}, function(err,data){
+            return callback(data.id)
+         });
     }
 
     function updateLoginTime(userId, time) {
-        //https://stackoverflow.com/questions/11662496/updating-a-couchdb-document-in-nano
+        // 1. get ID from doc
+        // 2. update this doc
+        update.db({ username: 'hat gefunkt' }, id, use)
     }
+
 
 module.exports = {
   addUser: addUser,
