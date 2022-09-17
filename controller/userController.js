@@ -1,21 +1,13 @@
 const userService = require('../service/userService');
 
-function signup(req, res) {
-    userService.addUser(req)
-    return res.json('User added: ' + req);
-};
-
-// for testing purpose only
-function update(req, res) {
-    userService.updateLoginTime(req.body.id)
-};
-
-function getuser(req, res) {
-    userService.getuser(req)
+class userController {
+    static signup(req, res) {
+        return userService.addUser(req).then(data => {
+            res.json('User added with id: ' + data);
+        }).catch(err => {
+            res.send(err);
+        });
+    }
 }
 
-module.exports = {
-  signup: signup,
-  update: update,
-  getuser: getuser,
-};
+module.exports = userController
