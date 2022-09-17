@@ -1,18 +1,18 @@
 require('dotenv').config()
 const nano = require('nano')(process.env.DBURL)
-const db = nano.use('user')
+const db = nano.use('session')
 
-class userRepository {
-    static addUser(user) {
+class sessionRepository {
+    static createSession(session) {
         return new Promise((resolve, reject) => {
-            db.insert({username: user.username, created: user.created}, function(err, data) {
+            db.insert({userId: session.userId, token: session.token, added: session.added}, function(err, data) {
                 if(err) return reject(err);
                 resolve(data.id);
             });
         });
     }
 
-    static deleteUser(id) {
+    static deleteSession(id) {
         return new Promise((resolve, reject) => {
             db.destroy(id, function(err, data) {
                 if(err) return reject(err);
@@ -21,9 +21,10 @@ class userRepository {
         });
     }
 
-    static findUserById(id) {
+    static validateSession(token) {
         return new Promise((resolve, reject) => {
-            db.get(id, function(err, data) {
+            // TODO: create view in couchdb
+            db.view('designname', 'viewname', {key: token}, function(err, data) {
                 if(err) return reject(err);
                 resolve(data);
             });
@@ -31,4 +32,4 @@ class userRepository {
     }
 }
 
-module.exports = userRepository
+module.exports = sessionRepository

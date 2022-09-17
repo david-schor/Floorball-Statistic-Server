@@ -1,19 +1,19 @@
 require('dotenv').config()
 const nano = require('nano')(process.env.DBURL)
-const db = nano.use('password')
+const db = nano.use('authenticator')
 
-class userRepository {
-    static addPassword(password) {
+class authenticatorRepository {
+    static addAuthenticator(authenticator) {
         return new Promise((resolve, reject) => {
-            db.insert({userId: password.userId, password: password.password}, function(err, data) {
+            db.insert({userId: authenticator.userId, label: authenticator.label, handle: authenticator.handle, publicKey: authenticator.publicKey, auth_type: authenticator.auth_type}, function(err, data) {
                 if(err) return reject(err);
                 resolve(data.id);
             });
         });
     }
 
-    static findPasswordByUser(userId) {
-        return new Promise((resolve, reject) => {
+    static findAuthenticatorByUser(userId) {
+        new Promise((resolve, reject) => {
             // TODO: create view in couchdb
             db.view('designname', 'viewname', {key: userId}, function(err, data) {
                 if(err) return reject(err);
@@ -23,4 +23,4 @@ class userRepository {
     }
 }
 
-module.exports = userRepository
+module.exports = authenticatorRepository
