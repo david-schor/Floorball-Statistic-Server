@@ -1,30 +1,9 @@
-const Schema = require('nano-schema')
-
-const authenticator = new Schema({
-    userId: {
-        type: Number,
-        required: true,
-    },
-    label: {
-        type: String,
-        required: true,
-    },
-    handle: {
-        type: Date,
-        required: true,
-    },
-    counter: {
-        type: Number,
-        required: true,
-    },
-    publicKey: {
-        type: String,
-        required: true,
-    },
-    auth_type: {
-        type: String,
-        required: true,
-    },
-});
-
-module.exports = authenticator
+exports class Authenticator {
+    constructor(userId, label, handle, publicKey, auth_type) {
+        this.userId = userId;
+        this.label = label;
+        this.handle = handle;
+        this.publicKey = publicKey;
+        this.auth_type = auth_type;
+    }
+}

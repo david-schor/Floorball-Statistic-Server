@@ -1,10 +1,6 @@
-function Password(userId, password, created) {
-  this.userId = userId
-  this.password = password
-  this.created = created
+exports class Password {
+    constructor(userId, password) {
+        this.userId = userId;
+        this.password = password;
+    }
 }
-
-module.exports = {
-  Password: Password,
-};
-
