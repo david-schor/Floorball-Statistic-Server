@@ -10,7 +10,12 @@ function update(req, res) {
     userService.updateLoginTime(req.body.id)
 };
 
+function getuser(req, res) {
+    userService.getuser(req)
+}
+
 module.exports = {
   signup: signup,
   update: update,
+  getuser: getuser,
 };

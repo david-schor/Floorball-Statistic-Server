@@ -3,16 +3,21 @@ const Password = require('../entity/password');
 const userRepository = require('../repository/userRepository')
 const passwordRepository = require('../repository/passwordRepository')
 
+    function getuser(req) {
+    /*
+        userRepository.findUserByName(req.body.username).then(user => {
+            Console.log('got it')
+        });
+
+        */
+
+        //userRepository.run();
+    }
+
     function addUser(req) {
-        return new Promise((res, rej) => {
-            //check password with JWTUtil
-            const user = new User.User(req.body.username, Date.now(), null)
-            userRepository.addUser(user, function(data){
-                const password = new Password.Password(data, req.body.password, Date.now())
-                passwordRepository.addPassword(password)
-            });
-
-
+        const user = new User(req.body.username, Date.now());
+        userRepository.addUser(user).then(data => {
+            console.log(data)
         });
     }
 
@@ -28,4 +33,5 @@ const passwordRepository = require('../repository/passwordRepository')
 module.exports = {
   addUser: addUser,
   updateLoginTime: updateLoginTime,
+  getuser: getuser,
 };
