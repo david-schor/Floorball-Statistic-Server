@@ -1,4 +1,4 @@
-exports class Authenticator {
+class Authenticator {
     constructor(userId, label, handle, publicKey, auth_type) {
         this.userId = userId;
         this.label = label;
@@ -7,3 +7,5 @@ exports class Authenticator {
         this.auth_type = auth_type;
     }
 }
+
+module.exports = Authenticator
